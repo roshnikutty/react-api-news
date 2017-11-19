@@ -9,3 +9,12 @@ body {
 li {
   list-style: none;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  background-color: rgba(214, 127, 127, 0.867);
+}

@@ -16,6 +16,7 @@ export const getLandingArticles = () => {
             url: API_URL,
             method: 'GET',
         }).done((articlesJson) => {
+            console.log(articlesJson)
             dispatch(getLandingArticlesSuccess(articlesJson))
         }).fail(err =>
             console.log(`Error while running getLandingArcles: ${err}`)
