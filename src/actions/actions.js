@@ -23,3 +23,9 @@ export const getLandingArticles = () => {
             )
     }
 }
+
+export const GET_ARTICLE_URL = "GET_ARTICLE_URL";
+export const getArticleUrl = (articleUrl) =>({
+    type: GET_ARTICLE_URL,
+    payload: articleUrl
+})

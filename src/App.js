@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getLandingArticles } from './actions/actions';
+import { getLandingArticles, getArticleUrl } from './actions/actions';
 import './App.css';
+import ArticleWindow from './ArticleWindow';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.viewArticle = this.viewArticle.bind(this);
   }
-  viewArticle(index) {
+  viewArticle(e, index) {
+    e.preventDefault();
     let articleUrl = this.props.landingPageArticles[index].url;
-    console.log(articleUrl)
+    this.props.dispatch(getArticleUrl(articleUrl))
   }
   componentWillMount(props) {
     this.props.dispatch(getLandingArticles());
@@ -20,8 +21,9 @@ class App extends Component {
     let articlesFromSevenDays;
     if (this.props.landingPageArticles) {
       articlesFromSevenDays = this.props.landingPageArticles.map((article, index) =>
-        <a href={article.url} onClick={this.viewArticle(index)}>
-          <li key={index}>
+        <a href="#" onClick={(e)=>this.viewArticle(e, index)} key={index}>
+          <li>
+            <img src={article.thumbnail_standard} height="80" width="80" />
             <p>TITLE: {article.title}</p>
             <p>ABSTRACT: {article.abstract}</p>
             <p>AUTHOR: {article.byline}</p>
@@ -31,8 +33,6 @@ class App extends Component {
             <p>SECTION: {article.section}</p>
             <p>UPDATED ON: {article.updated_date}</p>
             <p>TYPE: {article.material_type_facet}</p>
-            {/* <p>multimedia: {article.multimedia[0]} {article.multimedia[1]} {article.multimedia[2]} {article.multimedia[3]}</p> */}
-            {/* <iframe src={article.url} height="200" width="300"></iframe> */}
             <hr />
           </li>
         </a>
@@ -40,6 +40,7 @@ class App extends Component {
     }
     return (
       <div>
+        <ArticleWindow viewArticle={this.props.clickedArticleUrl} />
         {articlesFromSevenDays}
       </div>
     );
@@ -47,7 +48,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  landingPageArticles: state.landingPageArticles
+  landingPageArticles: state.landingPageArticles,
+  clickedArticleUrl: state.clickedArticleUrl
 })
 
 export default connect(mapStateToProps)(App);
