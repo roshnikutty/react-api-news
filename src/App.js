@@ -5,9 +5,6 @@ import './App.css';
 import ArticleWindow from './ArticleWindow';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   viewArticle(e, index) {
     e.preventDefault();
     let articleUrl = this.props.landingPageArticles[index].url;

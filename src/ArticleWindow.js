@@ -11,7 +11,4 @@ let ArticleWindow = (props) => {
             </iframe>
         </div>);
 }
-// const mapStateToProps = (state) => ({
-//     clickedArticleUrl: state.clickedArticleUrl
-// })
 export default connect()(ArticleWindow);
