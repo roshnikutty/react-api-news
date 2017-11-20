@@ -18,7 +18,7 @@ class App extends Component {
     let articlesFromSevenDays;
     if (this.props.landingPageArticles) {
       articlesFromSevenDays = this.props.landingPageArticles.map((article, index) =>
-        <a href="#" onClick={(e)=>this.viewArticle(e, index)} key={index}>
+        <a className="row" href="#" onClick={(e)=>this.viewArticle(e, index)} key={index}>
           <li>
             <img src={article.thumbnail_standard} height="80" width="80" />
             <p>TITLE: {article.title}</p>
@@ -38,7 +38,9 @@ class App extends Component {
     return (
       <div>
         <ArticleWindow viewArticle={this.props.clickedArticleUrl} />
-        {articlesFromSevenDays}
+        <div className="col-md-6">
+          {articlesFromSevenDays}
+        </div>
       </div>
     );
   }
