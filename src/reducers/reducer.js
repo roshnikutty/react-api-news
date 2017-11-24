@@ -5,7 +5,9 @@ let initialState = {
     landingPageArticles: [],
     clickedArticleUrl:"",
     searchItem: "", 
-    filteredArray: []
+    filteredArray: [],
+    emptyVisibility: false,
+    contentVisibility: true
 };
 
 export const nyTimesArticlesReducer = (state = initialState, action) => {
@@ -49,7 +51,14 @@ export const nyTimesArticlesReducer = (state = initialState, action) => {
     }
     if(action.type === DISPLAY_SEARCH_RESULTS) {
             let landingPageArticles = state.filteredArray;
-            return Object.assign({}, state, {landingPageArticles});
+            if(landingPageArticles.length){
+                return Object.assign({}, state, {landingPageArticles});
+            }
+            else{
+                let emptyVisibility = true;
+                let contentVisibility = false;
+                return Object.assign({}, state, {emptyVisibility}, {contentVisibility});
+            }
     }
     return state;
 }

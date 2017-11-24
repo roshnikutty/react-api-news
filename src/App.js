@@ -6,6 +6,7 @@ import { getLandingArticles, getArticleUrl,
 import './App.css';
 import ArticleWindow from './ArticleWindow';
 import Search from './Search';
+import Empty from './Empty';
 
 class App extends Component {
   constructor(props){
@@ -28,7 +29,7 @@ class App extends Component {
   handleButtonSubmit(e) {
     e.preventDefault();
     this.props.dispatch(searchAction(this.props.searchItem));
-    this.props.dispatch(displaySearchResults())
+    this.props.dispatch(displaySearchResults());
     document.getElementsByTagName("input")[0].value = "";     //clear input element for search
   }
 
@@ -52,18 +53,24 @@ class App extends Component {
         </a>
       )
     }
-    return (
-      <div>
-        <header>
-          <h1>THE TIMES</h1>
-          <Search onChange={this.handleItemChange} onClick={(e) =>this.handleButtonSubmit(e)} />
-        </header>
-        <ArticleWindow viewArticle={this.props.clickedArticleUrl} />
-        <div className="col-md-6">
-          {articlesFromSevenDays}
-        </div>
-      </div>
-    );
+    if(!this.props.contentVisibility) {
+      return (<Empty visibility={this.props.emptyVisibility.toString()}/>);
+    }
+    else {
+      return (
+          <div visibility={this.props.contentVisibility.toString()}>
+            <header>
+              <h1>THE TIMES</h1>
+              <Search onChange={this.handleItemChange} onClick={(e) =>this.handleButtonSubmit(e)} />
+            </header>
+
+            <ArticleWindow viewArticle={this.props.clickedArticleUrl}/>
+            <div className="col-md-6">
+              {articlesFromSevenDays}
+            </div>
+          </div>
+      );
+    }
   }
 }
 
@@ -71,7 +78,8 @@ const mapStateToProps = (state) => ({
   landingPageArticles: state.landingPageArticles,
   clickedArticleUrl: state.clickedArticleUrl,
   searchItem: state.searchItem,
-  //filteredArray: state.filteredArray
+  contentVisibility: state.contentVisibility,
+  emptyVisibility: state.emptyVisibility
 })
 
 export default connect(mapStateToProps)(App);

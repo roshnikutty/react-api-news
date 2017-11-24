@@ -46,6 +46,14 @@ a::visited{
   padding-left: 1.04166666%;
   padding-right: 1.04166666%;
 }
+h1 {
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+h2{
+  color: red;
+}
 
 button {
   display: inline-block;
