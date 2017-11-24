@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getLandingArticles, getArticleUrl } from './actions/actions';
+import { getLandingArticles, getArticleUrl, 
+  addSearchToState, searchAction, 
+  displaySearchResults } from './actions/actions';
 import './App.css';
 import ArticleWindow from './ArticleWindow';
+import Search from './Search';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.handleItemChange = this.handleItemChange.bind(this);
+  }
   viewArticle(e, index) {
     e.preventDefault();
     let articleUrl = this.props.landingPageArticles[index].url;
@@ -12,6 +19,17 @@ class App extends Component {
   }
   componentWillMount(props) {
     this.props.dispatch(getLandingArticles());
+  }
+  handleItemChange(e) {
+    e.preventDefault();
+    let itemValue = e.target.value;
+    this.props.dispatch(addSearchToState(itemValue));
+  }
+  handleButtonSubmit(e) {
+    e.preventDefault();
+    this.props.dispatch(searchAction(this.props.searchItem));
+    this.props.dispatch(displaySearchResults())
+    document.getElementsByTagName("input")[0].value = "";     //clear input element for search
   }
 
   render() {
@@ -25,7 +43,6 @@ class App extends Component {
             <p>ABSTRACT: {article.abstract}</p>
             <p>AUTHOR: {article.byline}</p>
             <p>CREATED: {article.created_date}</p>
-            {/* <p>URL: {article.url}</p> */}
             <p>SOURCE:{article.source}</p>
             <p>SECTION: {article.section}</p>
             <p>UPDATED ON: {article.updated_date}</p>
@@ -37,6 +54,10 @@ class App extends Component {
     }
     return (
       <div>
+        <header>
+          <h1>THE TIMES</h1>
+          <Search onChange={this.handleItemChange} onClick={(e) =>this.handleButtonSubmit(e)} />
+        </header>
         <ArticleWindow viewArticle={this.props.clickedArticleUrl} />
         <div className="col-md-6">
           {articlesFromSevenDays}
@@ -48,7 +69,9 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   landingPageArticles: state.landingPageArticles,
-  clickedArticleUrl: state.clickedArticleUrl
+  clickedArticleUrl: state.clickedArticleUrl,
+  searchItem: state.searchItem,
+  //filteredArray: state.filteredArray
 })
 
 export default connect(mapStateToProps)(App);

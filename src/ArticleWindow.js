@@ -4,13 +4,14 @@ import './App.css';
 
 
 let ArticleWindow = (props) => {
-    return (
-        <div className="frameStyle">
-            <iframe src={props.viewArticle}
-                title="View the article selected"
-                height="600"
-                width="450">
-            </iframe>
-        </div>);
-}
-export default connect()(ArticleWindow);
+        return ( <
+            div className = "frameStyle" >
+            <iframe 
+            src = { props.viewArticle } title = "View the article selected"
+            height = "600"
+            width = "450"
+            sandbox = "allow-same-origin" >
+            </iframe> 
+            </div>);
+        }
+        export default connect()(ArticleWindow);

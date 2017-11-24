@@ -16,7 +16,6 @@ export const getLandingArticles = () => {
             url: API_URL,
             method: 'GET',
         }).done((articlesJson) => {
-            console.log(articlesJson)
             dispatch(getLandingArticlesSuccess(articlesJson))
         }).fail(err =>
             console.log(`Error while running getLandingArcles: ${err}`)
@@ -29,3 +28,20 @@ export const getArticleUrl = (articleUrl) =>({
     type: GET_ARTICLE_URL,
     payload: articleUrl
 })
+
+export const ADD_SEARCH_ITEM = "ADD_SEARCH_ITEM";
+export const addSearchToState = (stuff_to_add) => ({
+    type: ADD_SEARCH_ITEM,
+    payload: stuff_to_add
+})
+
+export const SEARCH_ACTION = "SEARCH_ACTION";
+export const searchAction =(searchItem) => ({
+    type: SEARCH_ACTION,
+    payload: searchItem
+})
+
+export const DISPLAY_SEARCH_RESULTS = "DISPLAY_SEARCH_RESULTS";
+export const displaySearchResults = () => ({
+    type: DISPLAY_SEARCH_RESULTS
+    })
