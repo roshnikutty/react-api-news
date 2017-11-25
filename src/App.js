@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getLandingArticles, getArticleUrl, 
-  addSearchToState, searchAction } from './actions/actions';
+import {
+  getLandingArticles, getArticleUrl,
+  addSearchToState, searchAction
+} from './actions/actions';
 import './App.css';
 import ArticleWindow from './ArticleWindow';
 import Search from './Search';
@@ -9,7 +11,7 @@ import Empty from './Empty';
 import DisplaySearchResults from './DisplaySearchResults';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.handleItemChange = this.handleItemChange.bind(this);
   }
@@ -36,41 +38,40 @@ class App extends Component {
     let articlesFromSevenDays;
     if (this.props.landingPageArticles.length) {
       articlesFromSevenDays = this.props.landingPageArticles.map((article, index) =>
-        <a className="row" href="#" onClick={(e)=>this.viewArticle(e, index)} key={index}>
-          <li>
-            <img src={article.thumbnail_standard} height="80" width="80" />
-            <h3 className='title'> {article.title}</h3>
-            <p> {article.abstract}</p>
-            <p className = 'author'>{article.byline
-                                            .toLowerCase()
-                                            .split(' ')
-                                            .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()+ " ")}
-                                            </p>
-            <p className = 'created_time'> {article.created_date.substring(11,16)} EST</p>
-            <p>SECTION: {article.section}</p>
-            <hr />
-          </li>
-        </a>
+        <div key={index}>
+          <a className="row" href="#" onClick={(e) => this.viewArticle(e, index)} key={index}>
+            <li>
+              <img src={article.thumbnail_standard} height="80" width="80" />
+              <h3 className='title'> {article.title}</h3>
+              <p> {article.abstract}</p>
+              <p className='author'>{article.byline}</p>
+              <p className='created_time'> {article.created_date.substring(11, 16)} EST</p>
+              <p className='section'>{article.section}</p>
+            </li>
+          </a>
+          <a href={article.url} target='blank' className='url_style'>Open in a new tab</a>
+          <hr />
+        </div>
       )
     }
-    if(!this.props.contentVisibility && this.props.emptyVisibility) {
-      return (<Empty visibility={this.props.emptyVisibility.toString()}/>);
+    if (!this.props.contentVisibility && this.props.emptyVisibility) {
+      return (<Empty visibility={this.props.emptyVisibility.toString()} />);
     }
-    else if(this.props.contentVisibility) {
+    else if (this.props.contentVisibility) {
       return (
-          <div visibility={this.props.contentVisibility.toString()}>
-            <header>
-              <h1>THE TIMES</h1>
-              <Search onChange={this.handleItemChange} onClick={(e) =>this.handleButtonSubmit(e)} />
-            </header>
+        <div visibility={this.props.contentVisibility.toString()}>
+          <header>
+            <h1>THE TIMES</h1>
+            <Search onChange={this.handleItemChange} onClick={(e) => this.handleButtonSubmit(e)} />
+          </header>
 
-            <ArticleWindow viewArticle={this.props.clickedArticleUrl}/>
-            <div className="col-md-6">
-              {articlesFromSevenDays}
-            </div>
+          <ArticleWindow viewArticle={this.props.clickedArticleUrl} />
+          <div className="col-md-6">
+            {articlesFromSevenDays}
           </div>
+        </div>
       )
-    } 
+    }
     else {
       return (<DisplaySearchResults />);
     };
