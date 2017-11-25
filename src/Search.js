@@ -5,7 +5,7 @@ import './App.css';
 let Search = (props) => {
 	return (
 		<div>
-			<input type="text" size="50" placeholder="Search" onChange={props.onChange} />
+			<input type="text" size="35" placeholder="Search" onChange={props.onChange} />
             <button onClick={props.onClick}> Search </button>
 		</div>
 	);

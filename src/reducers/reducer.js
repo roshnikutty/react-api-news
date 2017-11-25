@@ -23,7 +23,6 @@ export const nyTimesArticlesReducer = (state = initialState, action) => {
                 url: article.url,
                 source:article.source,
                 section: article.section,
-                updated_date: article.updated_date,
                 material_type_facet: article.material_type_facet,
                 thumbnail_standard: article.thumbnail_standard
             }

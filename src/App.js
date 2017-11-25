@@ -39,14 +39,15 @@ class App extends Component {
         <a className="row" href="#" onClick={(e)=>this.viewArticle(e, index)} key={index}>
           <li>
             <img src={article.thumbnail_standard} height="80" width="80" />
-            <p>TITLE: {article.title}</p>
-            <p>ABSTRACT: {article.abstract}</p>
-            <p>AUTHOR: {article.byline}</p>
-            <p>CREATED: {article.created_date}</p>
-            <p>SOURCE:{article.source}</p>
+            <h3 className='title'> {article.title}</h3>
+            <p> {article.abstract}</p>
+            <p className = 'author'>{article.byline
+                                            .toLowerCase()
+                                            .split(' ')
+                                            .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()+ " ")}
+                                            </p>
+            <p className = 'created_time'> {article.created_date.substring(11,16)} EST</p>
             <p>SECTION: {article.section}</p>
-            <p>UPDATED ON: {article.updated_date}</p>
-            <p>TYPE: {article.material_type_facet}</p>
             <hr />
           </li>
         </a>
