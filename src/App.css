@@ -13,7 +13,7 @@ li {
 a {
   text-decoration: none;
 }
-a::visited{
+a:visited{
 	color: grey;
 }
 .frameStyle {
