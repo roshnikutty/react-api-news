@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 const API_KEY = `a8457610b68381085a3fff38d6a36337:6:74255139`;
-const API_URL = `http://api.nytimes.com/svc/news/v3/content/all/all?api-key=${API_KEY}`;
+const API_URL = `http://api.nytimes.com/svc/news/v3/content/all/all/168.json?api-key=${API_KEY}`;
 
 export const GET_LANDING_ARTICLES_SUCCESS = 'GET_LANDING_ARTICLES_SUCCESS';
 export const getLandingArticlesSuccess = (articles) => ({
@@ -34,14 +34,24 @@ export const addSearchToState = (stuff_to_add) => ({
     type: ADD_SEARCH_ITEM,
     payload: stuff_to_add
 })
-
-export const SEARCH_ACTION = "SEARCH_ACTION";
-export const searchAction =(searchItem) => ({
-    type: SEARCH_ACTION,
-    payload: searchItem
+export const GET_SEARCH_RESULTS_SUCCESS = 'GET_SEARCH_RESULTS_SUCCESS';
+export const getSearchResultSuccess = (articles) => ({
+    type: GET_SEARCH_RESULTS_SUCCESS,
+    payload: articles
 })
 
-export const DISPLAY_SEARCH_RESULTS = "DISPLAY_SEARCH_RESULTS";
-export const displaySearchResults = () => ({
-    type: DISPLAY_SEARCH_RESULTS
-    })
+export const searchAction =(searchItem) => {
+    const SEARCH_URL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${API_KEY}&q=${searchItem}`;
+    return function (dispatch) {
+        return $.ajax({
+            url: SEARCH_URL,
+            method: 'GET',
+        }).done((articlesJson) => {
+            console.log(articlesJson)
+            dispatch(getSearchResultSuccess(articlesJson))
+        }).fail(err =>
+            console.log(`Error while running searchAction: ${err}`)
+            )
+    }
+}
+

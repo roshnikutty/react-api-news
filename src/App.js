@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getLandingArticles, getArticleUrl, 
-  addSearchToState, searchAction, 
-  displaySearchResults } from './actions/actions';
+  addSearchToState, searchAction } from './actions/actions';
 import './App.css';
 import ArticleWindow from './ArticleWindow';
 import Search from './Search';
 import Empty from './Empty';
+import DisplaySearchResults from './DisplaySearchResults';
 
 class App extends Component {
   constructor(props){
@@ -29,13 +29,12 @@ class App extends Component {
   handleButtonSubmit(e) {
     e.preventDefault();
     this.props.dispatch(searchAction(this.props.searchItem));
-    this.props.dispatch(displaySearchResults());
     document.getElementsByTagName("input")[0].value = "";     //clear input element for search
   }
 
   render() {
     let articlesFromSevenDays;
-    if (this.props.landingPageArticles) {
+    if (this.props.landingPageArticles.length) {
       articlesFromSevenDays = this.props.landingPageArticles.map((article, index) =>
         <a className="row" href="#" onClick={(e)=>this.viewArticle(e, index)} key={index}>
           <li>
@@ -53,10 +52,10 @@ class App extends Component {
         </a>
       )
     }
-    if(!this.props.contentVisibility) {
+    if(!this.props.contentVisibility && this.props.emptyVisibility) {
       return (<Empty visibility={this.props.emptyVisibility.toString()}/>);
     }
-    else {
+    else if(this.props.contentVisibility) {
       return (
           <div visibility={this.props.contentVisibility.toString()}>
             <header>
@@ -69,8 +68,11 @@ class App extends Component {
               {articlesFromSevenDays}
             </div>
           </div>
-      );
-    }
+      )
+    } 
+    else {
+      return (<DisplaySearchResults />);
+    };
   }
 }
 

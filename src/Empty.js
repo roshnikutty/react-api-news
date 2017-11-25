@@ -15,7 +15,8 @@ let Empty = (props) => {
 				<div visibile={props.visibility}>
 					<h2>There are no results for this search.</h2>
 				</div>
-			</div>);
+			</div>
+		);
 	}
 };
 

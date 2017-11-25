@@ -1,13 +1,14 @@
 import { GET_LANDING_ARTICLES_SUCCESS,GET_ARTICLE_URL, 
-    ADD_SEARCH_ITEM, SEARCH_ACTION, DISPLAY_SEARCH_RESULTS } from '../actions/actions';
+    ADD_SEARCH_ITEM, GET_SEARCH_RESULTS_SUCCESS} from '../actions/actions';
 
 let initialState = {
     landingPageArticles: [],
     clickedArticleUrl:"",
     searchItem: "", 
-    filteredArray: [],
+    searchResultsArray: [],
     emptyVisibility: false,
-    contentVisibility: true
+    contentVisibility: true,
+    searchedArticles:[]
 };
 
 export const nyTimesArticlesReducer = (state = initialState, action) => {
@@ -37,22 +38,20 @@ export const nyTimesArticlesReducer = (state = initialState, action) => {
         let searchItem = action.payload;
         return Object.assign({}, state, {searchItem});
     }
-    if(action.type === SEARCH_ACTION){
-        let filteredArray = state.landingPageArticles.filter(function(newsItem){
-            return (newsItem.title === action.payload ||
-                newsItem.abstract === action.payload ||
-                newsItem.byline === action.payload ||
-                newsItem.source === action.payload ||
-                newsItem.section === action.payload ||
-                newsItem.material_type_facet === action.payload) 
-        });
-        console.log(filteredArray);
-        return Object.assign({}, state, {filteredArray});
-    }
-    if(action.type === DISPLAY_SEARCH_RESULTS) {
-            let landingPageArticles = state.filteredArray;
-            if(landingPageArticles.length){
-                return Object.assign({}, state, {landingPageArticles});
+    if(action.type === GET_SEARCH_RESULTS_SUCCESS) {
+        console.log(action.payload.response.docs)
+            let searchResultsArray = Object.values(action.payload.response.docs);
+            if(searchResultsArray.length){
+                let emptyVisibility = false;
+                let contentVisibility = false;
+                const searchedArticles = searchResultsArray.map((article, index)=>{
+                    return {
+                        headline: article.headline.main,
+                        url: article.web_url,
+                        summary: article.snippet
+                    }
+                })
+                return Object.assign({}, state, {emptyVisibility}, {contentVisibility}, {searchedArticles});
             }
             else{
                 let emptyVisibility = true;
