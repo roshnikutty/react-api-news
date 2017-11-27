@@ -54,9 +54,11 @@ class App extends Component {
         </div>
       )
     }
+    // If no content from API is available, show "There are no results for this search."
     if (!this.props.contentVisibility && this.props.emptyVisibility) {
       return (<Empty visibility={this.props.emptyVisibility.toString()} />);
     }
+    //Show API news content
     else if (this.props.contentVisibility) {
       return (
         <div visibility={this.props.contentVisibility.toString()}>
@@ -72,6 +74,7 @@ class App extends Component {
         </div>
       )
     }
+    //Or else, show search API results
     else {
       return (<DisplaySearchResults />);
     };

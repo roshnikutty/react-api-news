@@ -7,7 +7,9 @@
 
 3. Clicking on each news article opens the article in an iFrame to the right of the page.
 
-4. Search news on the top of the landing page utilizes New York Time's Search API endpoint.
+4. Search news on the top of the landing page utilizes New York Times's Search API endpoint.  -  Please click the "Search" button to view resullts
+ -  To get back to News refresh the browser window
+
 
 5. If the Search yields no search results, a React component with the message "There are no results for this search." will be displayed.
 
