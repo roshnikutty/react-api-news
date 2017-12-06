@@ -1,5 +1,15 @@
 # NY Times API
 
+### this application is built using node version 7.9.0 and npm version 4.2.0
+
+To run this application if you have other versions of Node, please use one of the following (listed below with links to documentation and terminal commands):
+
+nvm: https://github.com/creationix/nvm
+nave: https://github.com/isaacs/nave
+n: https://github.com/tj/n"
+
+## About the Application
+
 1. This application displays the news from the last 7 days using New York Times Newswire API endpoint.
   - Clicking on the news displays the articles in the iframe on the right
 
