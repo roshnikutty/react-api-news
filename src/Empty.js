@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './App.css';
 
-let Empty = (props) => {
+export let Empty = (props) => {
 	if(!props.visibility) {
 		return null;
 	}
 	else{
 		return (
-			<div>
+			<div className="emptyClass">
 				<header>
 	              <h1>THE TIMES</h1>
 	            </header>
@@ -20,5 +20,5 @@ let Empty = (props) => {
 	}
 };
 
-export default connect()(Empty);
+connect()(Empty);
 
