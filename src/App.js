@@ -7,7 +7,7 @@ import {
 import './App.css';
 import ArticleWindow from './ArticleWindow';
 import Search from './Search';
-import Empty from './Empty';
+import { Empty } from './Empty';
 import DisplaySearchResults from './DisplaySearchResults';
 
 class App extends Component {
