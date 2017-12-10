@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './App.css';
 
 
-let ArticleWindow = (props) => {
+export let ArticleWindow = (props) => {
     return (<div className="frameStyle" >
         <iframe
             src={props.viewArticle} title="View the article selected"
@@ -13,4 +13,4 @@ let ArticleWindow = (props) => {
         </iframe>
     </div>);
 }
-export default connect()(ArticleWindow);
+connect()(ArticleWindow);

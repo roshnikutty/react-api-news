@@ -1,7 +1,7 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 import { Empty } from './Empty';
 
-import { shallow } from 'enzyme';
 
 describe('<Empty />', () => {
     it('renders without crashing', () => {

@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './App.css';
 
-let DisplaySearchResults = (props) => {
-	console.log(props.searchedArticles);
+export let DisplaySearchResults = (props) => {
+	// console.log(props.searchedArticles);
 	if(!props.searchedArticles.length) {
 		return null;
 	}
@@ -32,5 +32,5 @@ const mapStateToProps =(state) => ({
 	searchedArticles: state.searchedArticles
 })
 
-export default connect(mapStateToProps)(DisplaySearchResults);
+connect(mapStateToProps)(DisplaySearchResults);
 

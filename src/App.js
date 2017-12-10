@@ -5,10 +5,10 @@ import {
   addSearchToState, searchAction
 } from './actions/actions';
 import './App.css';
-import ArticleWindow from './ArticleWindow';
-import Search from './Search';
+import { ArticleWindow } from './ArticleWindow';
+import { Search } from './Search';
 import { Empty } from './Empty';
-import DisplaySearchResults from './DisplaySearchResults';
+import { DisplaySearchResults } from './DisplaySearchResults';
 
 class App extends Component {
   constructor(props) {

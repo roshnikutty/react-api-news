@@ -14,7 +14,7 @@ export const getLandingArticles = () => {
     return function (dispatch) {
         return $.ajax({
             url: API_URL,
-            method: 'GET',
+            method: 'GET'
         }).done((articlesJson) => {
             dispatch(getLandingArticlesSuccess(articlesJson))
         }).fail(err =>
@@ -24,7 +24,7 @@ export const getLandingArticles = () => {
 }
 
 export const GET_ARTICLE_URL = "GET_ARTICLE_URL";
-export const getArticleUrl = (articleUrl) =>({
+export const getArticleUrl = (articleUrl) => ({
     type: GET_ARTICLE_URL,
     payload: articleUrl
 })
@@ -40,12 +40,12 @@ export const getSearchResultSuccess = (articles) => ({
     payload: articles
 })
 
-export const searchAction =(searchItem) => {
+export const searchAction = (searchItem) => {
     const SEARCH_URL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${API_KEY}&q=${searchItem}`;
     return function (dispatch) {
         return $.ajax({
             url: SEARCH_URL,
-            method: 'GET',
+            method: 'GET'
         }).done((articlesJson) => {
             console.log(articlesJson)
             dispatch(getSearchResultSuccess(articlesJson))

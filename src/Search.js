@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 
-let Search = (props) => {
+export let Search = (props) => {
 	return (
 		<div>
 			<input type="text" size="35" placeholder="Search" onChange={props.onChange} />
@@ -12,4 +12,4 @@ let Search = (props) => {
 
 };
 
-export default connect()(Search)
+ connect()(Search)
