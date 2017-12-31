@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { DisplaySearchResults } from './DisplaySearchResults';
 
 describe(`<DisplaySearchResults />`, () => {
@@ -16,12 +16,12 @@ describe(`<DisplaySearchResults />`, () => {
                 url: 'www.someurl2.com'
             }
         ];
-        shallow(<DisplaySearchResults searchedArticles={searchedTestArticles} />);
+        mount(<DisplaySearchResults searchedArticles={searchedTestArticles} />);
     });
 
     it(`should not display when there are no search results`, () => {
         const searchedArticlesNotFound = [];
-        const wrapper = shallow(<DisplaySearchResults
+        const wrapper = mount(<DisplaySearchResults
             searchedArticles={searchedArticlesNotFound} />)
         wrapper.update();
         expect(wrapper.find('div')).toHaveLength(0);
